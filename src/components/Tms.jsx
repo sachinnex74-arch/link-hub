@@ -485,6 +485,13 @@ _themeStyle.textContent = `
     box-shadow: 0 1px 0 rgba(15,23,42,0.02);
     transition: color .12s, border-color .12s, background .12s, box-shadow .12s;
   }
+  .tms-root label.lb-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 26px; margin: 0; padding: 0 10px;
+    font-size: .7rem; font-weight: 600; color: #6b7280;
+    letter-spacing: 0; line-height: 1; vertical-align: middle;
+  }
+  .tms-root label.lb-btn.lb-btn-ok { color: #16a34a; }
   .lb-btn > input[type="checkbox"] {
     appearance: none; -webkit-appearance: none;
     width: 13px; height: 13px; margin: 0; padding: 0;
