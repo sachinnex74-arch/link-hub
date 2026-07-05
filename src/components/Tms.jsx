@@ -5299,9 +5299,10 @@ window.__HALTS__ = function(halts) {
                                        {(av||queuedVeh) && (
                                          <button onClick={()=>unassign(l.id)} className="lb-btn lb-btn-warn">Unassign</button>
                                        )}
-                                       <label style={{display:"inline-flex",alignItems:"center",gap:3,padding:"3px 8px",border:"1px solid "+(isValidated?"#16a34a":"#e4e7ed"),borderRadius:12,background:isValidated?"rgba(34,197,94,0.08)":"transparent",cursor:"pointer",fontSize:".68rem",fontFamily:"'Inter',system-ui,sans-serif",fontWeight:600,color:isValidated?"#16a34a":"#6b7280",transition:"all .12s"}}>
-                                         <input type="checkbox" checked={isValidated} onChange={()=>toggleValidated(l.id)} style={{margin:0,cursor:"pointer"}}/> {isValidated?"Validated":"Validate"}
-                                       </label>
+                                        <label title={isValidated?"Uncheck to mark as not validated":"Mark as validated"} className={isValidated?"lb-btn lb-btn-ok":"lb-btn"} style={{cursor:"pointer"}}>
+                                          <input type="checkbox" checked={isValidated} onChange={()=>toggleValidated(l.id)} />
+                                          {isValidated?"Validated":"Validate"}
+                                        </label>
                                        <button onClick={()=>toggleUrgent(l.id)} style={{background:isUrgent?"#dc2626":"transparent",border:"1px solid #dc2626",color:isUrgent?"#ffffff":"#dc2626",padding:"3px 6px",borderRadius:12,cursor:"pointer",fontSize:".68rem",fontFamily:"'Inter',system-ui,sans-serif",fontWeight:600,display:"inline-flex",alignItems:"center",transition:"all .12s"}}><Flame size={12}/></button>
                                        <button onClick={()=>setIncidentModal(l.id)} style={{background:"transparent",border:"1px solid #fb923c",color:"#d97706",padding:"3px 6px",borderRadius:12,cursor:"pointer",fontSize:".68rem",fontFamily:"'Inter',system-ui,sans-serif",fontWeight:600,display:"inline-flex",alignItems:"center",transition:"all .12s"}}><AlertTriangle size={12}/></button>
                                        {showDelayBtn && (
