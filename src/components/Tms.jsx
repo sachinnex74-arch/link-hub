@@ -509,6 +509,17 @@ _themeStyle.textContent = `
     width: 4px; height: 8px; border: solid #ffffff;
     border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
   }
+  .lb-check {
+    width: 13px; height: 13px; border-radius: 3px;
+    border: 1.5px solid #cbd5e1; background: #ffffff;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex: none; position: relative;
+  }
+  .lb-check-on { background: #16a34a; border-color: #16a34a; }
+  .lb-check-on::after {
+    content: ""; width: 4px; height: 8px; border: solid #ffffff;
+    border-width: 0 1.5px 1.5px 0; transform: rotate(45deg) translate(-.5px,-.5px);
+  }
   .lb-btn:hover { color: #374151; border-color: #d1d5db; background: #f9fafb; box-shadow: 0 1px 2px rgba(15,23,42,0.06); }
   .lb-btn-ok { color: #16a34a; border-color: #d1fae5; background: #f0fdf4; }
   .lb-btn-ok:hover { color: #15803d; border-color: #a7f3d0; background: #ecfdf5; }
@@ -4854,10 +4865,10 @@ window.__HALTS__ = function(halts) {
 
                     <td style={{padding:".625rem .75rem"}}>
                       <div style={{display:"flex",gap:".35rem",alignItems:"center",flexWrap:"wrap"}}>
-                        <label title={isValidated?"Uncheck to mark as not validated":"Mark as validated"} className={isValidated?"lb-btn lb-btn-ok":"lb-btn"} style={{cursor:"pointer"}}>
-                          <input type="checkbox" checked={isValidated} onChange={()=>toggleValidated(l.id)} style={{margin:0,cursor:"pointer"}}/>
+                        <button type="button" onClick={()=>toggleValidated(l.id)} title={isValidated?"Uncheck to mark as not validated":"Mark as validated"} className={isValidated?"lb-btn lb-btn-ok":"lb-btn"} aria-pressed={isValidated}>
+                          <span aria-hidden="true" className={isValidated?"lb-check lb-check-on":"lb-check"} />
                           {isValidated?"Validated":"Validate"}
-                        </label>
+                        </button>
                         {(av || queuedVeh) && (
                           <button onClick={()=>unassign(l.id)} title={queuedVeh && !av ? "Remove queued vehicle" : "Unassign vehicle"} className="lb-btn lb-btn-warn">Unassign</button>
                         )}
