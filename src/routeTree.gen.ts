@@ -9,38 +9,268 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LogsRouteImport } from './routes/logs'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as GpsRouteImport } from './routes/gps'
+import { Route as DriverRouteImport } from './routes/driver'
+import { Route as ControlRouteImport } from './routes/control'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicStoppageTickRouteImport } from './routes/api/public/stoppage-tick'
+import { Route as ApiPublicPurgeDeletedTickRouteImport } from './routes/api/public/purge-deleted-tick'
+import { Route as ApiPublicLeftUnloadingTickRouteImport } from './routes/api/public/left-unloading-tick'
+import { Route as ApiPublicInvariantTickRouteImport } from './routes/api/public/invariant-tick'
+import { Route as ApiPublicGpsSnapshotRouteImport } from './routes/api/public/gps-snapshot'
+import { Route as ApiPublicGeofenceTickRouteImport } from './routes/api/public/geofence-tick'
+import { Route as ApiPublicDwellTickRouteImport } from './routes/api/public/dwell-tick'
+import { Route as ApiPublicArrivalTickRouteImport } from './routes/api/public/arrival-tick'
 
+const LogsRoute = LogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GpsRoute = GpsRouteImport.update({
+  id: '/gps',
+  path: '/gps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DriverRoute = DriverRouteImport.update({
+  id: '/driver',
+  path: '/driver',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControlRoute = ControlRouteImport.update({
+  id: '/control',
+  path: '/control',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicStoppageTickRoute = ApiPublicStoppageTickRouteImport.update({
+  id: '/api/public/stoppage-tick',
+  path: '/api/public/stoppage-tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicPurgeDeletedTickRoute =
+  ApiPublicPurgeDeletedTickRouteImport.update({
+    id: '/api/public/purge-deleted-tick',
+    path: '/api/public/purge-deleted-tick',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicLeftUnloadingTickRoute =
+  ApiPublicLeftUnloadingTickRouteImport.update({
+    id: '/api/public/left-unloading-tick',
+    path: '/api/public/left-unloading-tick',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicInvariantTickRoute = ApiPublicInvariantTickRouteImport.update({
+  id: '/api/public/invariant-tick',
+  path: '/api/public/invariant-tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicGpsSnapshotRoute = ApiPublicGpsSnapshotRouteImport.update({
+  id: '/api/public/gps-snapshot',
+  path: '/api/public/gps-snapshot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicGeofenceTickRoute = ApiPublicGeofenceTickRouteImport.update({
+  id: '/api/public/geofence-tick',
+  path: '/api/public/geofence-tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicDwellTickRoute = ApiPublicDwellTickRouteImport.update({
+  id: '/api/public/dwell-tick',
+  path: '/api/public/dwell-tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicArrivalTickRoute = ApiPublicArrivalTickRouteImport.update({
+  id: '/api/public/arrival-tick',
+  path: '/api/public/arrival-tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/control': typeof ControlRoute
+  '/driver': typeof DriverRoute
+  '/gps': typeof GpsRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/api/public/arrival-tick': typeof ApiPublicArrivalTickRoute
+  '/api/public/dwell-tick': typeof ApiPublicDwellTickRoute
+  '/api/public/geofence-tick': typeof ApiPublicGeofenceTickRoute
+  '/api/public/gps-snapshot': typeof ApiPublicGpsSnapshotRoute
+  '/api/public/invariant-tick': typeof ApiPublicInvariantTickRoute
+  '/api/public/left-unloading-tick': typeof ApiPublicLeftUnloadingTickRoute
+  '/api/public/purge-deleted-tick': typeof ApiPublicPurgeDeletedTickRoute
+  '/api/public/stoppage-tick': typeof ApiPublicStoppageTickRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/control': typeof ControlRoute
+  '/driver': typeof DriverRoute
+  '/gps': typeof GpsRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/api/public/arrival-tick': typeof ApiPublicArrivalTickRoute
+  '/api/public/dwell-tick': typeof ApiPublicDwellTickRoute
+  '/api/public/geofence-tick': typeof ApiPublicGeofenceTickRoute
+  '/api/public/gps-snapshot': typeof ApiPublicGpsSnapshotRoute
+  '/api/public/invariant-tick': typeof ApiPublicInvariantTickRoute
+  '/api/public/left-unloading-tick': typeof ApiPublicLeftUnloadingTickRoute
+  '/api/public/purge-deleted-tick': typeof ApiPublicPurgeDeletedTickRoute
+  '/api/public/stoppage-tick': typeof ApiPublicStoppageTickRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/control': typeof ControlRoute
+  '/driver': typeof DriverRoute
+  '/gps': typeof GpsRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/api/public/arrival-tick': typeof ApiPublicArrivalTickRoute
+  '/api/public/dwell-tick': typeof ApiPublicDwellTickRoute
+  '/api/public/geofence-tick': typeof ApiPublicGeofenceTickRoute
+  '/api/public/gps-snapshot': typeof ApiPublicGpsSnapshotRoute
+  '/api/public/invariant-tick': typeof ApiPublicInvariantTickRoute
+  '/api/public/left-unloading-tick': typeof ApiPublicLeftUnloadingTickRoute
+  '/api/public/purge-deleted-tick': typeof ApiPublicPurgeDeletedTickRoute
+  '/api/public/stoppage-tick': typeof ApiPublicStoppageTickRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/control'
+    | '/driver'
+    | '/gps'
+    | '/login'
+    | '/logs'
+    | '/api/public/arrival-tick'
+    | '/api/public/dwell-tick'
+    | '/api/public/geofence-tick'
+    | '/api/public/gps-snapshot'
+    | '/api/public/invariant-tick'
+    | '/api/public/left-unloading-tick'
+    | '/api/public/purge-deleted-tick'
+    | '/api/public/stoppage-tick'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app'
+    | '/control'
+    | '/driver'
+    | '/gps'
+    | '/login'
+    | '/logs'
+    | '/api/public/arrival-tick'
+    | '/api/public/dwell-tick'
+    | '/api/public/geofence-tick'
+    | '/api/public/gps-snapshot'
+    | '/api/public/invariant-tick'
+    | '/api/public/left-unloading-tick'
+    | '/api/public/purge-deleted-tick'
+    | '/api/public/stoppage-tick'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/control'
+    | '/driver'
+    | '/gps'
+    | '/login'
+    | '/logs'
+    | '/api/public/arrival-tick'
+    | '/api/public/dwell-tick'
+    | '/api/public/geofence-tick'
+    | '/api/public/gps-snapshot'
+    | '/api/public/invariant-tick'
+    | '/api/public/left-unloading-tick'
+    | '/api/public/purge-deleted-tick'
+    | '/api/public/stoppage-tick'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRoute
+  ControlRoute: typeof ControlRoute
+  DriverRoute: typeof DriverRoute
+  GpsRoute: typeof GpsRoute
+  LoginRoute: typeof LoginRoute
+  LogsRoute: typeof LogsRoute
+  ApiPublicArrivalTickRoute: typeof ApiPublicArrivalTickRoute
+  ApiPublicDwellTickRoute: typeof ApiPublicDwellTickRoute
+  ApiPublicGeofenceTickRoute: typeof ApiPublicGeofenceTickRoute
+  ApiPublicGpsSnapshotRoute: typeof ApiPublicGpsSnapshotRoute
+  ApiPublicInvariantTickRoute: typeof ApiPublicInvariantTickRoute
+  ApiPublicLeftUnloadingTickRoute: typeof ApiPublicLeftUnloadingTickRoute
+  ApiPublicPurgeDeletedTickRoute: typeof ApiPublicPurgeDeletedTickRoute
+  ApiPublicStoppageTickRoute: typeof ApiPublicStoppageTickRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/logs': {
+      id: '/logs'
+      path: '/logs'
+      fullPath: '/logs'
+      preLoaderRoute: typeof LogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gps': {
+      id: '/gps'
+      path: '/gps'
+      fullPath: '/gps'
+      preLoaderRoute: typeof GpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driver': {
+      id: '/driver'
+      path: '/driver'
+      fullPath: '/driver'
+      preLoaderRoute: typeof DriverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/control': {
+      id: '/control'
+      path: '/control'
+      fullPath: '/control'
+      preLoaderRoute: typeof ControlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +278,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/stoppage-tick': {
+      id: '/api/public/stoppage-tick'
+      path: '/api/public/stoppage-tick'
+      fullPath: '/api/public/stoppage-tick'
+      preLoaderRoute: typeof ApiPublicStoppageTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/purge-deleted-tick': {
+      id: '/api/public/purge-deleted-tick'
+      path: '/api/public/purge-deleted-tick'
+      fullPath: '/api/public/purge-deleted-tick'
+      preLoaderRoute: typeof ApiPublicPurgeDeletedTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/left-unloading-tick': {
+      id: '/api/public/left-unloading-tick'
+      path: '/api/public/left-unloading-tick'
+      fullPath: '/api/public/left-unloading-tick'
+      preLoaderRoute: typeof ApiPublicLeftUnloadingTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/invariant-tick': {
+      id: '/api/public/invariant-tick'
+      path: '/api/public/invariant-tick'
+      fullPath: '/api/public/invariant-tick'
+      preLoaderRoute: typeof ApiPublicInvariantTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/gps-snapshot': {
+      id: '/api/public/gps-snapshot'
+      path: '/api/public/gps-snapshot'
+      fullPath: '/api/public/gps-snapshot'
+      preLoaderRoute: typeof ApiPublicGpsSnapshotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/geofence-tick': {
+      id: '/api/public/geofence-tick'
+      path: '/api/public/geofence-tick'
+      fullPath: '/api/public/geofence-tick'
+      preLoaderRoute: typeof ApiPublicGeofenceTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/dwell-tick': {
+      id: '/api/public/dwell-tick'
+      path: '/api/public/dwell-tick'
+      fullPath: '/api/public/dwell-tick'
+      preLoaderRoute: typeof ApiPublicDwellTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/arrival-tick': {
+      id: '/api/public/arrival-tick'
+      path: '/api/public/arrival-tick'
+      fullPath: '/api/public/arrival-tick'
+      preLoaderRoute: typeof ApiPublicArrivalTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRoute,
+  ControlRoute: ControlRoute,
+  DriverRoute: DriverRoute,
+  GpsRoute: GpsRoute,
+  LoginRoute: LoginRoute,
+  LogsRoute: LogsRoute,
+  ApiPublicArrivalTickRoute: ApiPublicArrivalTickRoute,
+  ApiPublicDwellTickRoute: ApiPublicDwellTickRoute,
+  ApiPublicGeofenceTickRoute: ApiPublicGeofenceTickRoute,
+  ApiPublicGpsSnapshotRoute: ApiPublicGpsSnapshotRoute,
+  ApiPublicInvariantTickRoute: ApiPublicInvariantTickRoute,
+  ApiPublicLeftUnloadingTickRoute: ApiPublicLeftUnloadingTickRoute,
+  ApiPublicPurgeDeletedTickRoute: ApiPublicPurgeDeletedTickRoute,
+  ApiPublicStoppageTickRoute: ApiPublicStoppageTickRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
