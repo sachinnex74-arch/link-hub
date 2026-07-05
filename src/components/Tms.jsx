@@ -4855,8 +4855,8 @@ window.__HALTS__ = function(halts) {
                           <button onClick={()=>unassign(l.id)} title={queuedVeh && !av ? "Remove queued vehicle" : "Unassign vehicle"} className="lb-btn lb-btn-warn">Unassign</button>
                         )}
                         
-                        <button onClick={()=>toggleUrgent(l.id)} title={urgentLoads[l.id]?"Unmark urgent":"Mark urgent"} style={{background:urgentLoads[l.id]?"#dc2626":"transparent",border:"1px solid #dc2626",color:urgentLoads[l.id]?"#ffffff":"#dc2626",padding:"4px",borderRadius:6,cursor:"pointer",display:"flex",alignItems:"center"}}><Flame size={14} /></button>
-                        <button onClick={()=>setIncidentModal(l.id)} title="Report Incident" style={{background:"transparent",border:"1px solid #fb923c",color:"#d97706",padding:"4px",borderRadius:6,cursor:"pointer",display:"flex",alignItems:"center"}}><AlertTriangle size={14} /></button>
+                        <button onClick={()=>toggleUrgent(l.id)} title={urgentLoads[l.id]?"Unmark urgent":"Mark urgent"} className={urgentLoads[l.id]?"lb-act lb-act-flame-on":"lb-act lb-act-flame"}><Flame size={14} /></button>
+                        <button onClick={()=>setIncidentModal(l.id)} title="Report Incident" className="lb-act lb-act-warn"><AlertTriangle size={14} /></button>
                         {(() => {
                           if (l.lstatus === "LATE") return true;
                           if (!av || av.vstatus !== "IN_TRANSIT") return false;
@@ -4864,7 +4864,7 @@ window.__HALTS__ = function(halts) {
                           if (!targetAt || !arrivalAt) return false;
                           return (arrivalAt - targetAt) / 3600000 > 4;
                         })() && (
-                          <button onClick={()=>setTatModalLoadId(l.id)} title="Edit Delay Reason / Comments (TAT)" style={{background:"rgba(217,119,6,0.08)",border:"1px solid #d97706",color:"#d97706",padding:"4px 6px",borderRadius:6,cursor:"pointer",display:"flex",alignItems:"center",fontSize:".68rem",fontFamily:"'Inter',system-ui,sans-serif",fontWeight:600,letterSpacing:0,gap:3}}> Delay</button>
+                          <button onClick={()=>setTatModalLoadId(l.id)} title="Edit Delay Reason / Comments (TAT)" className="lb-btn-delay">Delay</button>
                         )}
 
                         <button onClick={()=>setSeeMoreLoadId(l.id)} title="See more details" className="lb-act"><Eye size={14} /></button>
