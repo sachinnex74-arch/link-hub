@@ -477,26 +477,63 @@ _themeStyle.textContent = `
   /* Compact text-button family: identical height (24px), quiet neutral resting
      state, intent color revealed on hover only. The modern-SaaS button voice. */
   .lb-btn {
-    display: inline-flex; align-items: center; gap: 4px; height: 24px;
-    padding: 0 10px; border-radius: 6px; border: 1px solid #e5e7eb;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    height: 26px; padding: 0 10px; border-radius: 6px; border: 1px solid #e5e7eb;
     background: #ffffff; color: #6b7280; cursor: pointer;
     font-family: 'Inter', system-ui, sans-serif; font-size: .7rem; font-weight: 600;
     letter-spacing: 0; text-transform: none; white-space: nowrap; line-height: 1;
-    transition: color .12s, border-color .12s, background .12s;
+    box-shadow: 0 1px 0 rgba(15,23,42,0.02);
+    transition: color .12s, border-color .12s, background .12s, box-shadow .12s;
   }
-  .lb-btn:hover { color: #374151; border-color: #d1d5db; background: #f9fafb; }
+  .lb-btn > input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 13px; height: 13px; margin: 0; padding: 0;
+    border: 1.5px solid #cbd5e1; border-radius: 3px;
+    background: #ffffff; display: inline-block; flex: none;
+    position: relative; cursor: pointer;
+    transition: background .12s, border-color .12s;
+  }
+  .lb-btn > input[type="checkbox"]:hover { border-color: #94a3b8; }
+  .lb-btn > input[type="checkbox"]:checked {
+    background: #16a34a; border-color: #16a34a;
+  }
+  .lb-btn > input[type="checkbox"]:checked::after {
+    content: ""; position: absolute; left: 3px; top: 0px;
+    width: 4px; height: 8px; border: solid #ffffff;
+    border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+  }
+  .lb-btn:hover { color: #374151; border-color: #d1d5db; background: #f9fafb; box-shadow: 0 1px 2px rgba(15,23,42,0.06); }
   .lb-btn-ok { color: #16a34a; border-color: #d1fae5; background: #f0fdf4; }
   .lb-btn-ok:hover { color: #15803d; border-color: #a7f3d0; background: #ecfdf5; }
+  .lb-btn-warn { color: #b45309; border-color: #fde68a; background: #fffbeb; }
   .lb-btn-warn:hover { color: #b45309; border-color: #fde68a; background: #fffbeb; }
 
   .lb-act {
-    background: transparent; border: none; color: #9ca3af; padding: 5px;
-    border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center;
-    opacity: .75; transition: color .12s, background .12s, opacity .12s;
+    background: transparent; border: 1px solid transparent; color: #9ca3af;
+    height: 26px; width: 26px; padding: 0; border-radius: 6px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    opacity: .75; transition: color .12s, background .12s, opacity .12s, border-color .12s;
   }
   .lb-row:hover .lb-act { opacity: 1; color: #6b7280; }
   .lb-act:hover { color: #374151; background: #f3f4f6; }
   .lb-act-danger:hover { color: #dc2626; background: #fef2f2; }
+  /* Intent-tinted icon buttons that match .lb-act sizing exactly */
+  .lb-act-flame { color: #dc2626; border-color: #fecaca; opacity: 1; }
+  .lb-act-flame:hover { color: #b91c1c; background: #fef2f2; border-color: #fca5a5; }
+  .lb-act-flame-on { color: #ffffff; background: #dc2626; border-color: #dc2626; opacity: 1; }
+  .lb-act-flame-on:hover { color: #ffffff; background: #b91c1c; border-color: #b91c1c; }
+  .lb-act-warn { color: #d97706; border-color: #fed7aa; opacity: 1; }
+  .lb-act-warn:hover { color: #b45309; background: #fff7ed; border-color: #fdba74; }
+  /* Delay pill matches lb-btn height for a clean row */
+  .lb-btn-delay {
+    display: inline-flex; align-items: center; gap: 4px; height: 26px;
+    padding: 0 8px; border-radius: 6px; border: 1px solid #fed7aa;
+    background: #fff7ed; color: #b45309; cursor: pointer;
+    font-family: 'Inter', system-ui, sans-serif; font-size: .68rem; font-weight: 600;
+    letter-spacing: 0; white-space: nowrap; line-height: 1;
+    transition: color .12s, background .12s, border-color .12s;
+  }
+  .lb-btn-delay:hover { color: #9a3412; background: #ffedd5; border-color: #fdba74; }
 
   /* ── Load card view ── */
   .lb-card-grid { display: flex; flex-direction: column; gap: 12px; }
@@ -4818,8 +4855,8 @@ window.__HALTS__ = function(halts) {
                           <button onClick={()=>unassign(l.id)} title={queuedVeh && !av ? "Remove queued vehicle" : "Unassign vehicle"} className="lb-btn lb-btn-warn">Unassign</button>
                         )}
                         
-                        <button onClick={()=>toggleUrgent(l.id)} title={urgentLoads[l.id]?"Unmark urgent":"Mark urgent"} style={{background:urgentLoads[l.id]?"#dc2626":"transparent",border:"1px solid #dc2626",color:urgentLoads[l.id]?"#ffffff":"#dc2626",padding:"4px",borderRadius:6,cursor:"pointer",display:"flex",alignItems:"center"}}><Flame size={14} /></button>
-                        <button onClick={()=>setIncidentModal(l.id)} title="Report Incident" style={{background:"transparent",border:"1px solid #fb923c",color:"#d97706",padding:"4px",borderRadius:6,cursor:"pointer",display:"flex",alignItems:"center"}}><AlertTriangle size={14} /></button>
+                        <button onClick={()=>toggleUrgent(l.id)} title={urgentLoads[l.id]?"Unmark urgent":"Mark urgent"} className={urgentLoads[l.id]?"lb-act lb-act-flame-on":"lb-act lb-act-flame"}><Flame size={14} /></button>
+                        <button onClick={()=>setIncidentModal(l.id)} title="Report Incident" className="lb-act lb-act-warn"><AlertTriangle size={14} /></button>
                         {(() => {
                           if (l.lstatus === "LATE") return true;
                           if (!av || av.vstatus !== "IN_TRANSIT") return false;
@@ -4827,7 +4864,7 @@ window.__HALTS__ = function(halts) {
                           if (!targetAt || !arrivalAt) return false;
                           return (arrivalAt - targetAt) / 3600000 > 4;
                         })() && (
-                          <button onClick={()=>setTatModalLoadId(l.id)} title="Edit Delay Reason / Comments (TAT)" style={{background:"rgba(217,119,6,0.08)",border:"1px solid #d97706",color:"#d97706",padding:"4px 6px",borderRadius:6,cursor:"pointer",display:"flex",alignItems:"center",fontSize:".68rem",fontFamily:"'Inter',system-ui,sans-serif",fontWeight:600,letterSpacing:0,gap:3}}> Delay</button>
+                          <button onClick={()=>setTatModalLoadId(l.id)} title="Edit Delay Reason / Comments (TAT)" className="lb-btn-delay">Delay</button>
                         )}
 
                         <button onClick={()=>setSeeMoreLoadId(l.id)} title="See more details" className="lb-act"><Eye size={14} /></button>
