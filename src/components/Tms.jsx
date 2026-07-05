@@ -6034,9 +6034,9 @@ window.__HALTS__ = function(halts) {
                               ));
                             })()}
                             {ld && (() => { const isV = !!ld.validated; return (
-                              <label title={isV?"Uncheck to mark as not validated":"Mark as validated"} style={{display:"inline-flex",alignItems:"center",gap:3,padding:"3px 6px",border:"1px solid "+(isV?"#16a34a":"#e4e7ed"),borderRadius:6,background:isV?"rgba(34,197,94,0.1)":"transparent",cursor:"pointer",fontSize:".68rem",fontFamily:"'Inter',system-ui,sans-serif",fontWeight:600,letterSpacing:0,textTransform:"uppercase",color:isV?"#16a34a":"#6b7280"}}>
-                                <input type="checkbox" checked={isV} onChange={()=>toggleValidated(ld.id)} style={{margin:0,cursor:"pointer"}}/>
-                                {isV?"Validated":"Validate"}
+                              <label title={isV?"Uncheck to mark as not validated":"Mark as validated"} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",gap:6,height:26,padding:"0 10px",border:"1px solid "+(isV?"#86efac":"#e5e7eb"),borderRadius:6,background:isV?"#f0fdf4":"#ffffff",cursor:"pointer",fontSize:".72rem",fontFamily:"'Inter',system-ui,sans-serif",fontWeight:600,letterSpacing:0,textTransform:"uppercase",color:isV?"#16a34a":"#6b7280",boxShadow:"0 1px 2px rgba(15,23,42,0.04)",transition:"all .12s",lineHeight:1}}>
+                                <input type="checkbox" checked={isV} onChange={()=>toggleValidated(ld.id)} style={{margin:0,width:13,height:13,accentColor:"#16a34a",cursor:"pointer",flexShrink:0}}/>
+                                <span style={{display:"inline-block",lineHeight:1}}>{isV?"Validated":"Validate"}</span>
                               </label>
                             );})()}
                           </div>
