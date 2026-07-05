@@ -4,16 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold leading-none transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
-        default: "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
-        outline: "text-foreground",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive: "bg-[var(--status-danger-bg)] text-[var(--status-danger-fg)]",
+        outline: "border border-border text-foreground",
+        "muted-success": "bg-[var(--status-ok-bg)] text-[var(--status-ok-fg)]",
+        "muted-warning": "bg-[var(--status-warn-bg)] text-[var(--status-warn-fg)]",
+        "muted-danger":  "bg-[var(--status-danger-bg)] text-[var(--status-danger-fg)]",
+        "muted-info":    "bg-[var(--status-info-bg)] text-[var(--status-info-fg)]",
+        "muted-neutral": "bg-[var(--status-neutral-bg)] text-[var(--status-neutral-fg)]",
+        "muted-active":  "bg-[var(--status-active-bg)] text-[var(--status-active-fg)]",
       },
     },
     defaultVariants: {

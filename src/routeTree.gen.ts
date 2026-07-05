@@ -9,38 +9,229 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LogsRouteImport } from './routes/logs'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as GpsRouteImport } from './routes/gps'
+import { Route as DriverRouteImport } from './routes/driver'
+import { Route as ControlRouteImport } from './routes/control'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicPurgeDeletedTickRouteImport } from './routes/api/public/purge-deleted-tick'
+import { Route as ApiPublicLeftUnloadingTickRouteImport } from './routes/api/public/left-unloading-tick'
+import { Route as ApiPublicGpsSnapshotRouteImport } from './routes/api/public/gps-snapshot'
+import { Route as ApiPublicGeofenceTickRouteImport } from './routes/api/public/geofence-tick'
+import { Route as ApiPublicArrivalTickRouteImport } from './routes/api/public/arrival-tick'
 
+const LogsRoute = LogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GpsRoute = GpsRouteImport.update({
+  id: '/gps',
+  path: '/gps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DriverRoute = DriverRouteImport.update({
+  id: '/driver',
+  path: '/driver',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControlRoute = ControlRouteImport.update({
+  id: '/control',
+  path: '/control',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicPurgeDeletedTickRoute =
+  ApiPublicPurgeDeletedTickRouteImport.update({
+    id: '/api/public/purge-deleted-tick',
+    path: '/api/public/purge-deleted-tick',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicLeftUnloadingTickRoute =
+  ApiPublicLeftUnloadingTickRouteImport.update({
+    id: '/api/public/left-unloading-tick',
+    path: '/api/public/left-unloading-tick',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicGpsSnapshotRoute = ApiPublicGpsSnapshotRouteImport.update({
+  id: '/api/public/gps-snapshot',
+  path: '/api/public/gps-snapshot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicGeofenceTickRoute = ApiPublicGeofenceTickRouteImport.update({
+  id: '/api/public/geofence-tick',
+  path: '/api/public/geofence-tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicArrivalTickRoute = ApiPublicArrivalTickRouteImport.update({
+  id: '/api/public/arrival-tick',
+  path: '/api/public/arrival-tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/control': typeof ControlRoute
+  '/driver': typeof DriverRoute
+  '/gps': typeof GpsRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/api/public/arrival-tick': typeof ApiPublicArrivalTickRoute
+  '/api/public/geofence-tick': typeof ApiPublicGeofenceTickRoute
+  '/api/public/gps-snapshot': typeof ApiPublicGpsSnapshotRoute
+  '/api/public/left-unloading-tick': typeof ApiPublicLeftUnloadingTickRoute
+  '/api/public/purge-deleted-tick': typeof ApiPublicPurgeDeletedTickRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/control': typeof ControlRoute
+  '/driver': typeof DriverRoute
+  '/gps': typeof GpsRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/api/public/arrival-tick': typeof ApiPublicArrivalTickRoute
+  '/api/public/geofence-tick': typeof ApiPublicGeofenceTickRoute
+  '/api/public/gps-snapshot': typeof ApiPublicGpsSnapshotRoute
+  '/api/public/left-unloading-tick': typeof ApiPublicLeftUnloadingTickRoute
+  '/api/public/purge-deleted-tick': typeof ApiPublicPurgeDeletedTickRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/control': typeof ControlRoute
+  '/driver': typeof DriverRoute
+  '/gps': typeof GpsRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/api/public/arrival-tick': typeof ApiPublicArrivalTickRoute
+  '/api/public/geofence-tick': typeof ApiPublicGeofenceTickRoute
+  '/api/public/gps-snapshot': typeof ApiPublicGpsSnapshotRoute
+  '/api/public/left-unloading-tick': typeof ApiPublicLeftUnloadingTickRoute
+  '/api/public/purge-deleted-tick': typeof ApiPublicPurgeDeletedTickRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/control'
+    | '/driver'
+    | '/gps'
+    | '/login'
+    | '/logs'
+    | '/api/public/arrival-tick'
+    | '/api/public/geofence-tick'
+    | '/api/public/gps-snapshot'
+    | '/api/public/left-unloading-tick'
+    | '/api/public/purge-deleted-tick'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app'
+    | '/control'
+    | '/driver'
+    | '/gps'
+    | '/login'
+    | '/logs'
+    | '/api/public/arrival-tick'
+    | '/api/public/geofence-tick'
+    | '/api/public/gps-snapshot'
+    | '/api/public/left-unloading-tick'
+    | '/api/public/purge-deleted-tick'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/control'
+    | '/driver'
+    | '/gps'
+    | '/login'
+    | '/logs'
+    | '/api/public/arrival-tick'
+    | '/api/public/geofence-tick'
+    | '/api/public/gps-snapshot'
+    | '/api/public/left-unloading-tick'
+    | '/api/public/purge-deleted-tick'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRoute
+  ControlRoute: typeof ControlRoute
+  DriverRoute: typeof DriverRoute
+  GpsRoute: typeof GpsRoute
+  LoginRoute: typeof LoginRoute
+  LogsRoute: typeof LogsRoute
+  ApiPublicArrivalTickRoute: typeof ApiPublicArrivalTickRoute
+  ApiPublicGeofenceTickRoute: typeof ApiPublicGeofenceTickRoute
+  ApiPublicGpsSnapshotRoute: typeof ApiPublicGpsSnapshotRoute
+  ApiPublicLeftUnloadingTickRoute: typeof ApiPublicLeftUnloadingTickRoute
+  ApiPublicPurgeDeletedTickRoute: typeof ApiPublicPurgeDeletedTickRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/logs': {
+      id: '/logs'
+      path: '/logs'
+      fullPath: '/logs'
+      preLoaderRoute: typeof LogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gps': {
+      id: '/gps'
+      path: '/gps'
+      fullPath: '/gps'
+      preLoaderRoute: typeof GpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driver': {
+      id: '/driver'
+      path: '/driver'
+      fullPath: '/driver'
+      preLoaderRoute: typeof DriverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/control': {
+      id: '/control'
+      path: '/control'
+      fullPath: '/control'
+      preLoaderRoute: typeof ControlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +239,57 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/purge-deleted-tick': {
+      id: '/api/public/purge-deleted-tick'
+      path: '/api/public/purge-deleted-tick'
+      fullPath: '/api/public/purge-deleted-tick'
+      preLoaderRoute: typeof ApiPublicPurgeDeletedTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/left-unloading-tick': {
+      id: '/api/public/left-unloading-tick'
+      path: '/api/public/left-unloading-tick'
+      fullPath: '/api/public/left-unloading-tick'
+      preLoaderRoute: typeof ApiPublicLeftUnloadingTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/gps-snapshot': {
+      id: '/api/public/gps-snapshot'
+      path: '/api/public/gps-snapshot'
+      fullPath: '/api/public/gps-snapshot'
+      preLoaderRoute: typeof ApiPublicGpsSnapshotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/geofence-tick': {
+      id: '/api/public/geofence-tick'
+      path: '/api/public/geofence-tick'
+      fullPath: '/api/public/geofence-tick'
+      preLoaderRoute: typeof ApiPublicGeofenceTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/arrival-tick': {
+      id: '/api/public/arrival-tick'
+      path: '/api/public/arrival-tick'
+      fullPath: '/api/public/arrival-tick'
+      preLoaderRoute: typeof ApiPublicArrivalTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRoute,
+  ControlRoute: ControlRoute,
+  DriverRoute: DriverRoute,
+  GpsRoute: GpsRoute,
+  LoginRoute: LoginRoute,
+  LogsRoute: LogsRoute,
+  ApiPublicArrivalTickRoute: ApiPublicArrivalTickRoute,
+  ApiPublicGeofenceTickRoute: ApiPublicGeofenceTickRoute,
+  ApiPublicGpsSnapshotRoute: ApiPublicGpsSnapshotRoute,
+  ApiPublicLeftUnloadingTickRoute: ApiPublicLeftUnloadingTickRoute,
+  ApiPublicPurgeDeletedTickRoute: ApiPublicPurgeDeletedTickRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

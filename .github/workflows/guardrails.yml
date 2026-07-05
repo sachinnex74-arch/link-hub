@@ -1,0 +1,65 @@
+name: guardrails
+# ══════════════════════════════════════════════════════════════════════════════
+# Phase V — CI guardrails. Runs on EVERY push (including web-UI file uploads,
+# which is how this repo deploys). Three checks, each mapped to a real incident:
+#
+#   1. FILE-SIZE TELLS — the two July-4/5 upload mistakes (tombstone uploaded
+#      into tms.functions.ts; Tms.jsx/file swaps) would both have failed here
+#      within seconds of the push, BEFORE Vercel served the broken build.
+#   2. RAW-WRITE SCANNER — the existing prebuild lint (client code must never
+#      write loads/vehicles outside the sanctioned lanes), now enforced by
+#      machine on every push, not just local builds.
+#   3. SYNTAX — the critical files must parse. A truncated paste or a stray
+#      character fails the push visibly.
+#
+# A red ✗ on a commit in GitHub = do not deploy that commit; the ✗'s log says
+# exactly which check failed and why.
+# ══════════════════════════════════════════════════════════════════════════════
+on:
+  push:
+    branches: [REFIX123]
+  pull_request:
+
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+
+      - name: 1 · File-size tells (upload-mistake tripwire)
+        run: |
+          set -e
+          check () {
+            local file="$1" min="$2" label="$3"
+            if [ ! -f "$file" ]; then echo "::error::$file is MISSING"; exit 1; fi
+            local size=$(wc -c < "$file")
+            if [ "$size" -lt "$min" ]; then
+              echo "::error::$label ($file) is ${size} bytes — expected at least ${min}. Wrong file uploaded to this path? (This is the tombstone-swap tripwire.)"
+              exit 1
+            fi
+            echo "OK  $label: ${size} bytes (min ${min})"
+          }
+          # Tells from the working sizes, with generous slack below current values:
+          check src/components/Tms.jsx        400000 "Tms.jsx (main app, ~580 KB)"
+          check src/lib/supaSync.ts            60000 "supaSync.ts (~94 KB)"
+          check src/lib/tms.functions.ts       30000 "tms.functions.ts (~56 KB)"
+          # The tombstone must stay TINY — if this grows, the nukes came back:
+          admin_size=$(wc -c < src/lib/tms-admin.functions.ts)
+          if [ "$admin_size" -gt 5000 ]; then
+            echo "::error::tms-admin.functions.ts is ${admin_size} bytes — it must stay a tombstone (<5 KB). Bulk-nuke code must not return (M3 audit)."
+            exit 1
+          fi
+          echo "OK  tms-admin tombstone: ${admin_size} bytes"
+
+      - name: 2 · Raw-write scanner (sanctioned-lanes lint)
+        run: node scripts/lint-raw-writes.mjs
+
+      - name: 3 · Syntax — critical files must parse
+        run: |
+          npx --yes esbuild@0.21.5 src/lib/supaSync.ts       --bundle=false --loader:.ts=ts   --outdir=/tmp/ci --log-level=error
+          npx --yes esbuild@0.21.5 src/lib/tms.functions.ts  --bundle=false --loader:.ts=ts   --outdir=/tmp/ci --log-level=error
+          npx --yes esbuild@0.21.5 src/lib/geo.functions.ts  --bundle=false --loader:.ts=ts   --outdir=/tmp/ci --log-level=error
+          npx --yes esbuild@0.21.5 src/components/Tms.jsx    --bundle=false --loader:.jsx=jsx --outdir=/tmp/ci --log-level=error
+          echo "All critical files parse."
