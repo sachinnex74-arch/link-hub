@@ -299,14 +299,14 @@ async function flushPendingWrites() {
         if (res.ok === false && res.reason === "op_in_flight") throw new Error("op_in_flight");
         console.info("[op replay]", write.payload?.fn, write.id, res.replayed ? "(replayed)" : "", res.ok === false ? `refused:${res.reason}` : "ok");
       } else if (write.op === "upsert") {
-        await directUpsert(write.table, write.id, write.payload, write.extra);
+        await directUpsert(write.table as SyncTable, write.id, write.payload, write.extra);
       } else if (write.table === "loads") {
         const sb = await ensureSupabase();
         if (!sb) throw new Error("Supabase client not available");
         const { error } = await sb.rpc("app_delete_load", { p_id: write.id });
         if (error) throw new Error(error.message);
       } else {
-        await directDelete(write.table, write.id);
+        await directDelete(write.table as SyncTable, write.id);
       }
       removePendingWrite(write);
     } catch (e) {
